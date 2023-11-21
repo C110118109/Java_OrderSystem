@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <!-- tools:layout  可直接連接到需要的layout -->
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.uni.plovdiv.hapnitopni.ui.home.HomeFragment"
+        android:label="開始"
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_nav_home_to_nav_menu"
+            app:destination="@id/nav_menu"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_menu"
+        android:name="com.uni.plovdiv.hapnitopni.ui.gallery.MenuFragment"
+        android:label="菜單"
+        tools:layout="@layout/menu_fragment" />
+
+    <fragment
+        android:id="@+id/nav_favourite"
+        android:name="com.uni.plovdiv.hapnitopni.ui.slideshow.FavouriteFragment"
+        android:label="收藏夾"
+        tools:layout="@layout/favourite_fragment" />
+    <fragment
+        android:id="@+id/nav_edit_user"
+        android:name="com.uni.plovdiv.hapnitopni.ui.EditUserFragment"
+        android:label="編輯個人資料"
+        tools:layout="@layout/fragment_edit_user" />
+</navigation>
