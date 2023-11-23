@@ -51,11 +51,11 @@
 
                 <TextView
                     android:id="@+id/location_address"
-                    android:layout_width="match_parent"
+                    android:layout_width="130dp"
                     android:layout_height="58dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="35dp"
                     android:gravity="center"
-                    android:text="811高雄市楠梓區                     創新路885號"
+                    android:text="811高雄市楠梓區創新路885號"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:text="                     "
+                        android:text="                       "
                         android:textColor="#4CAF50"
                         android:textSize="17sp" />
 

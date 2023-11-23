@@ -1,13 +1,20 @@
 package com.uni.plovdiv.hapnitopni.ui.gallery;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,14 +35,16 @@ public class LocationFragment extends Fragment  {
     private ArrayList<Locations> locations;
 
 
+    Button toGMap;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //productsInfo = myDbHandler.allProducts();
-        return inflater.inflate(R.layout.location_fragment, container, false);
+        View root = inflater.inflate(R.layout.location_fragment, container, false);
 
+        return root;
     }
 
     @Override
