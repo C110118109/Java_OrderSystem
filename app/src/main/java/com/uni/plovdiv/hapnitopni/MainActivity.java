@@ -28,6 +28,7 @@ import com.uni.plovdiv.hapnitopni.activities.StartActivity;
 import com.uni.plovdiv.hapnitopni.databinding.ActivityMainBinding;
 
 import com.uni.plovdiv.hapnitopni.entities.Products;
+import com.uni.plovdiv.hapnitopni.entities.Locations;
 import com.uni.plovdiv.hapnitopni.repository.MyDBHandler;
 
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     List<Products> products = new ArrayList<Products>();
-
+    List<Locations> locations = new ArrayList<Locations>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +134,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         //
-
+        for(Locations y : locations){
+            if (myDbHandler.checkLocationExist(y) !=true){
+                myDbHandler.addLocation(y);
+            }
+        }
         // Activity 中的一種方法，設定為應用欄
         setSupportActionBar(binding.appBarMain.toolbar);
 
@@ -190,6 +195,8 @@ public class MainActivity extends AppCompatActivity {
         });
         return true;
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {

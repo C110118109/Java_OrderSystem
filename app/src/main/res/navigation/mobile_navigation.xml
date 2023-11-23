@@ -24,7 +24,11 @@
         android:name="com.uni.plovdiv.hapnitopni.ui.gallery.MenuFragment"
         android:label="菜單"
         tools:layout="@layout/menu_fragment" />
-
+    <fragment
+        android:id="@+id/nav_location"
+        android:name="com.uni.plovdiv.hapnitopni.ui.gallery.LocationFragment"
+        android:label="地圖"
+        tools:layout="@layout/location_fragment" />
     <fragment
         android:id="@+id/nav_favourite"
         android:name="com.uni.plovdiv.hapnitopni.ui.slideshow.FavouriteFragment"

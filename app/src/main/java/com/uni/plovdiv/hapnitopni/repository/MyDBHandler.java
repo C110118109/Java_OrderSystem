@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.uni.plovdiv.hapnitopni.entities.Locations;
 import com.uni.plovdiv.hapnitopni.entities.Products;
 import com.uni.plovdiv.hapnitopni.entities.Users;
 
@@ -41,7 +42,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
 //    public static final String COLUMN_PRODUCT_TO_ORDERS_ID = "product_ID";
 //    public static final String COLUMN_QUANTITY = "quantity";
 
-
+    //table LOCATIONS info
+    public static final String TABLE_LOCATIONS_NAME = "locations";
+    public static final String COLUMN_LOCATION_ID = "id";
+    public static final String COLUMN_PHOTO_ID = "photo_id";
+    public static final String COLUMN_LOCATION_NAME = "location_name";
+    public static final String COLUMN_ADDRESS = "address";
+    public static final String COLUMN_TAB = "TAB";
 
     public MyDBHandler(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -74,9 +81,17 @@ public class MyDBHandler extends SQLiteOpenHelper {
 //                COLUMN_PRODUCT_TO_ORDERS_ID + " INTEGER ," +
 //                COLUMN_QUANTITY + " INTEGER " +
 //                ");";
+        String query3 = "CREATE TABLE " + TABLE_LOCATIONS_NAME + "(" +
+                COLUMN_LOCATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_PHOTO_ID + " INTEGER ," +
+                COLUMN_LOCATION_NAME + " TEXT ," +
+                COLUMN_ADDRESS + " TEXT ," +
+                COLUMN_TAB + " TEXT " +
+                ");";
 
         sqLiteDatabase.execSQL(query);
         sqLiteDatabase.execSQL(query2);
+        sqLiteDatabase.execSQL(query3);
 //        sqLiteDatabase.execSQL(query3);
     }
 
@@ -84,6 +99,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_LOCATIONS_NAME);
 //        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS_NAME);
         onCreate(sqLiteDatabase);
     }
@@ -102,6 +118,20 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    public void addLocation(Locations location) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PHOTO_ID, location.getPhoto());
+        values.put(COLUMN_LOCATION_NAME, location.getName());
+        values.put(COLUMN_ADDRESS, location.getAddress());
+        values.put(COLUMN_TAB, location.getTab());
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.insert(TABLE_LOCATIONS_NAME, null, values);
+        db.close();
+    }
+
     //check if already have a product with the same name
     public Boolean checkProductExist(Products product) {
         SQLiteDatabase db = getWritableDatabase();
@@ -109,6 +139,20 @@ public class MyDBHandler extends SQLiteOpenHelper {
         //rawQuery method ask for query and array where to put the selected info
         Cursor cursor = db.rawQuery("Select * from products where product_name = ?",
                 new String[]{product.getName()});
+
+        if (cursor.getCount() > 0)
+            return true;
+        else
+            return false;
+
+    }
+
+    public Boolean checkLocationExist(Locations location) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        //rawQuery method ask for query and array where to put the selected info
+        Cursor cursor = db.rawQuery("Select * from locations where location_name = ?",
+                new String[]{location.getName()});
 
         if (cursor.getCount() > 0)
             return true;
@@ -143,6 +187,30 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return productsArrayList;
     }
 
+    public ArrayList<Locations> allLocations() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from " + TABLE_LOCATIONS_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<Locations> locationsArrayList= new ArrayList<>();
+
+        // from first to last row in table products
+        if (cursor.moveToFirst()) {
+            do {
+                //adding the data
+                locationsArrayList.add(new Locations(cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4)));
+            } while (cursor.moveToNext());
+
+        }
+
+        cursor.close();
+        //return ArrayList for easiest use
+        return locationsArrayList;
+    }
 
 
 

@@ -10,7 +10,7 @@ Then saving favourite products for each user in the database.
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/104200628/206855659-d1cffa5e-792c-49af-b402-12e0439daf1d.jpg" width="200" height="400" />
-  
+  [license.md](license.md)
 <img src="https://user-images.githubusercontent.com/104200628/206855658-bcbe4887-369b-4b68-8cd9-dd6b8c7307d7.jpg" width="200" height="400" />
   
 <img src="https://user-images.githubusercontent.com/104200628/206855656-83398f17-1dbe-4957-b8d9-932474e46939.jpg" width="200" height="400" />

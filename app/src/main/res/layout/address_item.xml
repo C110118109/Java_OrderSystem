@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="魚" />
+        android:text="楠梓創新店" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/product_image"
+                android:id="@+id/location_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -42,20 +42,20 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/product_name"
+                    android:id="@+id/location_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="魚"
+                    android:text="楠梓創新店"
                     android:textSize="19sp" />
 
                 <TextView
-                    android:id="@+id/product_description"
+                    android:id="@+id/location_address"
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:text="非常美味。 這是必須嘗試的。 放在盤子裡煮熟。"
+                    android:text="811高雄市楠梓區                     創新路885號"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -64,27 +64,25 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/product_price"
+                        android:id="@+id/location_tab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:text="19.50лв."
+                        android:text="                     "
                         android:textColor="#4CAF50"
                         android:textSize="17sp" />
 
                     <Button
-                        android:id="@+id/product_button"
+                        android:id="@+id/location_button"
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="1dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_design"
-                        app:icon="@drawable/ic_baseline_favorite_24"
-                        app:iconPadding="0dp"
-                        app:iconTint="@android:color/holo_red_dark"
+                        android:background="@drawable/map_24px"
+
                         tools:ignore="TouchTargetSizeCheck" />
 
                 </LinearLayout>
