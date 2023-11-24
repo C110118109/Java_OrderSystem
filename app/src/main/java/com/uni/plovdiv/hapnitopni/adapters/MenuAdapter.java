@@ -46,7 +46,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
         holder.image.setImageResource(product.getImage());
         holder.name.setText(product.getName());
         holder.description.setText(product.getDescription());
-        holder.price.setText(product.getPrice()+"лв");
+        holder.price.setText(product.getPrice()+"元");
     }
 
     @Override

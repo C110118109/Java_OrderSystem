@@ -78,36 +78,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //取得資源識別碼的方法，
-        int resID_1 = getResId("pizza", R.drawable.class); // or other resource class
+        int resID_1 = getResId("brownsugar_bubble_boob", R.drawable.class); // or other resource class
         //println(Integer.toString(resID_1));
-        int resID_2 = getResId("fish", R.drawable.class);
-        int resID_3 = getResId("sushi", R.drawable.class);
-        int resID_4 = getResId("salad", R.drawable.class);
-        int resID_5 = getResId("pasta", R.drawable.class);
-        int resID_6 = getResId("cake", R.drawable.class);
-        int resID_7 = getResId("cocktail", R.drawable.class);
+        int resID_2 = getResId("bubble_greenbean_milk", R.drawable.class);
+        int resID_3 = getResId("bubble_milktea", R.drawable.class);
+        int resID_4 = getResId("bubble_peanut_milkice", R.drawable.class);
+        int resID_5 = getResId("carambola_juice", R.drawable.class);
+        int resID_6 = getResId("dajia_taro", R.drawable.class);
+        int resID_7 = getResId("fourgreentea", R.drawable.class);
+        int resID_8 = getResId("honey_greentea", R.drawable.class);
+        int resID_9 = getResId("lemon_carambola", R.drawable.class);
+        int resID_10 = getResId("manor_cocoa_milk", R.drawable.class);
+        int resID_11 = getResId("matcha_latte", R.drawable.class);
+        int resID_12 = getResId("lemon_ice", R.drawable.class);
+        int resID_13 = getResId("passion_greentea", R.drawable.class);
+        int resID_14 = getResId("wintermelon_boob", R.drawable.class);
         //not the best way to do it but still works :)
         //can be optimized!!!
         //創建Products 物件，先定義Produce類別  entities/Produce
-        Products pr1 = new Products(resID_1,"披薩","在烤箱中烘烤","12.90");
-        Products pr2 = new Products(resID_2,"魚","放在盤子裡烤","15.20");
-        Products pr3 = new Products(resID_3,"壽司","配芝麻和鮭魚","20.40");
-        Products pr4 = new Products(resID_4,"沙拉","用愛製造","10.55");
-        Products pr5 = new Products(resID_5,"義大利麵","博洛尼亞肉醬有兩種肉","14.10");
-        Products pr6 = new Products(resID_6,"甜點","自製","4.30");
-        Products pr7 = new Products(resID_7,"雞尾酒","杜松子酒和補品","8.30");
+        Products pr1 = new Products(resID_1,"黑糖珍珠撞奶","天氣好冷該喝什麼好呢？❄️冬季飲品首選『黑糖珍珠撞奶』","55");
+        Products pr2 = new Products(resID_2,"珍珠綠豆沙牛奶","新鮮檸檬·酸甜滋味·清爽沁涼\n" + "酸酸甜甜～夏天來一杯清涼解膩","60");
+        Products pr3 = new Products(resID_3,"珍珠奶茶","戀愛可以慢慢談，奶茶必須馬上喝(*¯︶¯*)","50");
+        Products pr4 = new Products(resID_4,"珍珠花生牛奶冰沙","濃郁花生冰沙尬濃醇鮮奶簡直絕配❤️\n" + "再搭配Q彈黑糖珍珠～一喝就愛上‼️\n" + "夏日快來杯花生冰沙～好事會花生","65");
+        Products pr5 = new Products(resID_5,"楊桃汁","春夏喝一杯多冰的楊桃汁消暑解渴\n" + "秋冬務必喝一杯熱楊桃汁止咳潤肺","40");
+        Products pr6 = new Products(resID_6,"大甲芋頭","嚴選在地大甲芋頭！\n" + "吃的到微微芋頭顆粒～濃郁香氣與綿密的口感讓人無法抵抗","60");
+        Products pr7 = new Products(resID_7,"四季青茶","","30");
+        Products pr8 = new Products(resID_8,"蜂蜜綠茶","人生短短幾個秋～不醉不罷休","40");
+        Products pr9 = new Products(resID_9,"檸檬楊桃汁","獨特檸檬冰沙搭配楊桃汁，酸酸甜甜～消暑解渴\n" + "特調飲品首選，清涼～夠爽.ᐟ.ᐟ.ᐟ","40");
+        Products pr10 = new Products(resID_10,"莊園可可奶","喝杯可可奶☕️能量滿滿的一天⚡️\n","55");
+        Products pr11 = new Products(resID_11,"抹茶拿鐵","","55");
+        Products pr12 = new Products(resID_12,"檸檬冰沙","新鮮檸檬·酸甜滋味·清爽沁涼\n" + "酸酸甜甜～夏天來一杯清涼解膩","40");
+        Products pr13 = new Products(resID_13,"百香果綠茶","使用100%百香果原汁\n" + "酸酸甜甜回購率爆表\n" + "愛喝酸的冰友絕對不能錯過‼️","50");
+        Products pr14 = new Products(resID_14,"冬瓜撞奶","","45");
 
         //now try with one more to be sure - adding to database
 
 
         //添加Produce在list中
-        products.add(pr1);
-        products.add(pr2);
-        products.add(pr3);
-        products.add(pr4);
-        products.add(pr5);
-        products.add(pr6);
-        products.add(pr7);
+        products.add(pr1);products.add(pr2);products.add(pr3);products.add(pr4);products.add(pr5);products.add(pr6);products.add(pr7);
+        products.add(pr8);products.add(pr9);products.add(pr10);products.add(pr11);products.add(pr12);products.add(pr13);products.add(pr14);
+
 
         int resID_a = getResId("icon", R.drawable.class);
         Log.d("ResID", "icon Res ID: " + resID_a);
@@ -123,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         Locations l10 = new Locations(resID_a,"大寮輔英店","831高雄市大寮區進學路187號","");
         Locations l11 = new Locations(resID_a,"林園店","832高雄市林園區東林東路13號","");
         locations.add(l2);locations.add(l3);locations.add(l4);locations.add(l5);locations.add(l6);locations.add(l7);
-        locations.add(l8);locations.add(l9);locations.add(l10);locations.add(l1);
+        locations.add(l8);locations.add(l9);locations.add(l10);locations.add(l11);
 
         //inflate 方法會將 XML(ActivityMainBinding)(大小寫不影響) 佈局檔案轉換為對應的 View 物件
         binding = ActivityMainBinding.inflate(getLayoutInflater());
