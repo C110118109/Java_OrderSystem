@@ -6,6 +6,7 @@ import static java.sql.DriverManager.println;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
@@ -107,6 +108,22 @@ public class MainActivity extends AppCompatActivity {
         products.add(pr5);
         products.add(pr6);
         products.add(pr7);
+
+        int resID_a = getResId("icon", R.drawable.class);
+        Log.d("ResID", "icon Res ID: " + resID_a);
+        Locations l1 = new Locations(resID_a,"楠梓創新店","811高雄市楠梓區創新路885號","");
+        Locations l2 = new Locations(resID_a,"岡山前峰店","820高雄市岡山區園西路二段145號","");
+        Locations l3 = new Locations(resID_a,"瑞豐店 ","813高雄市左營區裕誠路1096號第9排","");
+        Locations l4 = new Locations(resID_a,"鳳山文化店 ","830高雄市鳳山區文化西路20號","");
+        Locations l5 = new Locations(resID_a,"三民熱河店","807高雄市三民區熱河一街98號","");
+        Locations l6 = new Locations(resID_a,"育樂店","806高雄市前鎮區育樂路69號","");
+        Locations l7 = new Locations(resID_a,"大民店","815高雄市大社區三民路213號","");
+        Locations l8 = new Locations(resID_a,"小港漢民店","812高雄市小港區漢民路129號","");
+        Locations l9 = new Locations(resID_a,"中庄店","831高雄市大寮區鳳屏一路426號","");
+        Locations l10 = new Locations(resID_a,"大寮輔英店","831高雄市大寮區進學路187號","");
+        Locations l11 = new Locations(resID_a,"林園店","832高雄市林園區東林東路13號","");
+        locations.add(l2);locations.add(l3);locations.add(l4);locations.add(l5);locations.add(l6);locations.add(l7);
+        locations.add(l8);locations.add(l9);locations.add(l10);locations.add(l1);
 
         //inflate 方法會將 XML(ActivityMainBinding)(大小寫不影響) 佈局檔案轉換為對應的 View 物件
         binding = ActivityMainBinding.inflate(getLayoutInflater());

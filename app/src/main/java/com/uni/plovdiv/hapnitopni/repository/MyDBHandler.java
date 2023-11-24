@@ -48,7 +48,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PHOTO_ID = "photo_id";
     public static final String COLUMN_LOCATION_NAME = "location_name";
     public static final String COLUMN_ADDRESS = "address";
-    public static final String COLUMN_TAB = "TAB";
+    public static final String COLUMN_TAB = "tab";
 
     public MyDBHandler(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -120,16 +120,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
 
     public void addLocation(Locations location) {
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_PHOTO_ID, location.getPhoto());
-        values.put(COLUMN_LOCATION_NAME, location.getName());
-        values.put(COLUMN_ADDRESS, location.getAddress());
-        values.put(COLUMN_TAB, location.getTab());
+        ContentValues valuess = new ContentValues();
+        valuess.put(COLUMN_PHOTO_ID, location.getPhoto());
+        valuess.put(COLUMN_LOCATION_NAME, location.getName());
+        valuess.put(COLUMN_ADDRESS, location.getAddress());
+        valuess.put(COLUMN_TAB, location.getTab());
 
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase dbb = getWritableDatabase();
 
-        db.insert(TABLE_LOCATIONS_NAME, null, values);
-        db.close();
+        dbb.insert(TABLE_LOCATIONS_NAME, null, valuess);
+        dbb.close();
     }
 
     //check if already have a product with the same name
