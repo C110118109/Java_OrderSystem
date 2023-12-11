@@ -23,6 +23,6 @@
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/favourite_item"
+        tools:listitem="@layout/product_item"
         />
 </FrameLayout>

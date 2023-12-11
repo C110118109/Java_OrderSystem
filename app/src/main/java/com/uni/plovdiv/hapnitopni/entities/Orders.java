@@ -4,15 +4,16 @@ public class Orders {
 
     private int id;
     private int user_id ;
-    private int product_id;
+    private int product_name;
     private int quantity ;
+    private int number ;
 
-    public Orders(int id, int user_id, int product_id, int quantity) {
+    public Orders(int id, int user_id, int product_id, int quantity,int number) {
         this.id = id;
         this.user_id = user_id;
-        this.product_id = product_id;
+        this.product_name = product_name;
         this.quantity = quantity;
-
+        this.number = number;
     }
 
     public int getId() {
@@ -31,12 +32,12 @@ public class Orders {
         this.user_id = user_id;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getProduct_name() {
+        return product_name;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProduct_name(int product_name) {
+        this.product_name = product_name;
     }
 
     public int getQuantity() {
@@ -45,6 +46,14 @@ public class Orders {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
 

@@ -25,6 +25,11 @@
         android:label="菜單"
         tools:layout="@layout/menu_fragment" />
     <fragment
+        android:id="@+id/nav_order"
+        android:name="com.uni.plovdiv.hapnitopni.ui.gallery.ShoppingcartFragment"
+        android:label="購物車"
+        tools:layout="@layout/shoppinrcart_fragment" />
+    <fragment
         android:id="@+id/nav_location"
         android:name="com.uni.plovdiv.hapnitopni.ui.gallery.LocationFragment"
         android:label="店家"

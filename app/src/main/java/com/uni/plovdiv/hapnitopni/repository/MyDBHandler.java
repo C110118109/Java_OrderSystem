@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.uni.plovdiv.hapnitopni.entities.Favourites;
 import com.uni.plovdiv.hapnitopni.entities.Locations;
+import com.uni.plovdiv.hapnitopni.entities.Orders;
 import com.uni.plovdiv.hapnitopni.entities.Products;
 import com.uni.plovdiv.hapnitopni.entities.Users;
 
@@ -35,12 +37,21 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_PRICE = "price";
 
+    //table FAVOURITES info
+    public static final String TABLE_FAVOURITES_NAME = "favourites";
+    public static final String COLUMN_FAVOURITE_ID = "fa_id";
+    public static final String COLUMN_FA_IMAGE_ID = "fa_image_id";
+    public static final String COLUMN_FA_PRODUCT_NAME = "fa_product_name";
+    public static final String COLUMN_FA_DESCRIPTION = "fa_description";
+    public static final String COLUMN_FA_PRICE = "fa_price";
+
     //table ORDERS info
-//    public static final String TABLE_ORDERS_NAME = "orders";
-//    public static final String COLUMN_ORDER_ID = "id";
-//    public static final String COLUMN_USER_TO_ORDERS_ID = "user_id";
-//    public static final String COLUMN_PRODUCT_TO_ORDERS_ID = "product_ID";
-//    public static final String COLUMN_QUANTITY = "quantity";
+    public static final String TABLE_ORDERS_NAME = "orders";
+    public static final String COLUMN_ORDER_ID = "id";
+    public static final String COLUMN_USER_TO_ORDERS_ID = "user_id";
+    public static final String COLUMN_PRODUCT_TO_ORDERS_ID = "product_name";
+    public static final String COLUMN_QUANTITY = "quantity";
+    public static final String COLUMN_NUMBER = "number";
 
     //table LOCATIONS info
     public static final String TABLE_LOCATIONS_NAME = "locations";
@@ -89,10 +100,29 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_TAB + " TEXT " +
                 ");";
 
+        String query4 = "CREATE TABLE " + TABLE_ORDERS_NAME + "(" +
+                COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USER_TO_ORDERS_ID + " INTEGER ," +
+                COLUMN_PRODUCT_TO_ORDERS_ID + " TEXT ," +
+                COLUMN_QUANTITY + " INTEGER ," +
+                COLUMN_NUMBER + " INTEGER" +
+                ");";
+
+        //if price is string could be easiest for retrieving data and put in the fragment using TextView
+        String query5 = "CREATE TABLE " + TABLE_FAVOURITES_NAME + "(" +
+                COLUMN_FAVOURITE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_FA_IMAGE_ID + " INTEGER ," +
+                COLUMN_FA_PRODUCT_NAME + " TEXT ," +
+                COLUMN_FA_DESCRIPTION + " TEXT ," +
+                COLUMN_FA_PRICE + " TEXT " +
+                ");";
+
         sqLiteDatabase.execSQL(query);
         sqLiteDatabase.execSQL(query2);
         sqLiteDatabase.execSQL(query3);
-//        sqLiteDatabase.execSQL(query3);
+        sqLiteDatabase.execSQL(query4);
+        sqLiteDatabase.execSQL(query5);
+
     }
 
     @Override
@@ -100,7 +130,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_LOCATIONS_NAME);
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVOURITES_NAME);
         onCreate(sqLiteDatabase);
     }
 
@@ -117,7 +148,30 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_PRODUCTS_NAME, null, values);
         db.close();
     }
+    public void addFavourite(Favourites favourite) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FA_IMAGE_ID, favourite.getImage());
+        values.put(COLUMN_FA_PRODUCT_NAME, favourite.getName());
+        values.put(COLUMN_FA_DESCRIPTION, favourite.getDescription());
+        values.put(COLUMN_FA_PRICE, favourite.getPrice());
 
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.insert(TABLE_FAVOURITES_NAME, null, values);
+        db.close();
+    }
+//    public void addOrder(Orders order) {
+//        ContentValues values = new ContentValues();
+//        values.put(COLUMN_PRODUCT_TO_ORDERS_ID, order.g());
+//        values.put(COLUMN_PRODUCT_NAME, order.getName());
+//        values.put(COLUMN_DESCRIPTION, order.getDescription());
+//        values.put(COLUMN_PRICE, order.getPrice());
+//
+//        SQLiteDatabase db = getWritableDatabase();
+//
+//        db.insert(TABLE_PRODUCTS_NAME, null, values);
+//        db.close();
+//    }
 
     public void addLocation(Locations location) {
         ContentValues valuess = new ContentValues();
@@ -146,7 +200,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
             return false;
 
     }
+    public Boolean checkFavouriteExist(Favourites favourite) {
+        SQLiteDatabase db = getWritableDatabase();
 
+        //rawQuery method ask for query and array where to put the selected info
+        Cursor cursor = db.rawQuery("Select * from favourites where fa_product_name = ?",
+                new String[]{favourite.getName()});
+
+        if (cursor.getCount() > 0)
+            return true;
+        else
+            return false;
+
+    }
     public Boolean checkLocationExist(Locations location) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -187,6 +253,31 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return productsArrayList;
     }
 
+    public ArrayList<Favourites> allFavourites() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from " + TABLE_FAVOURITES_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<Favourites> favouritesArrayList= new ArrayList<>();
+
+        // from first to last row in table products
+        if (cursor.moveToFirst()) {
+            do {
+                //adding the data
+                favouritesArrayList.add(new Favourites(cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4)));
+            } while (cursor.moveToNext());
+
+        }
+
+        cursor.close();
+        //return ArrayList for easiest use
+        return favouritesArrayList;
+    }
+
     public ArrayList<Locations> allLocations() {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -212,7 +303,20 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return locationsArrayList;
     }
 
+    //add a new row to the table Orders
+    public Boolean Orderation(Orders order) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NUMBER, order.getNumber());
+        values.put(COLUMN_USER_ID, order.getUser_id());
+        values.put(COLUMN_PRODUCT_TO_ORDERS_ID, order.getProduct_name());
+//        values.put(COLUMN_IS_CURRENT_USER, bool);
+        SQLiteDatabase db = getWritableDatabase();
+        //db.insert returns type long
+        long result = db.insert(TABLE_ORDERS_NAME, null, values);
+        db.close();
 
+        return result != -1;
+    }
 
 
     //add a new row to the table Users
@@ -259,7 +363,23 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return cursor.getCount() > 0;
 
     }
+    public String[] getOrderProduct(String number) {
+        SQLiteDatabase db = getWritableDatabase();
+        String ProductName= "";
+        String[] result = new String[1];
+        Cursor cursor = db.rawQuery("Select product_name from orders where id =" + number ,null);
 
+        if(cursor.moveToFirst()){
+            ProductName += cursor.getString(0);
+
+        }else{
+            ProductName = "not found";
+        }
+
+        result[0] = ProductName;
+
+        return result;
+    }
     public String[] getUserEmail(String user_id) {
         SQLiteDatabase db = getWritableDatabase();
         String email= "";
