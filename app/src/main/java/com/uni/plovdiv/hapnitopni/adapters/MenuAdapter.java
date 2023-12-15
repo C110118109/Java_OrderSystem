@@ -3,6 +3,7 @@ package com.uni.plovdiv.hapnitopni.adapters;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uni.plovdiv.hapnitopni.R;
+import com.uni.plovdiv.hapnitopni.entities.Favourites;
 import com.uni.plovdiv.hapnitopni.entities.Products;
+import com.uni.plovdiv.hapnitopni.repository.MyDBHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Products> productsArrayList;
-
+    List<Favourites> favourites = new ArrayList<Favourites>();
+    MyDBHandler myDbHandler;
 
     public MenuAdapter(Context context, ArrayList<Products> productsArrayList) {
         this.context = context;
@@ -47,6 +52,30 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
         holder.name.setText(product.getName());
         holder.description.setText(product.getDescription());
         holder.price.setText(product.getPrice()+"元");
+
+        holder.favouritebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 將菜單添加至收藏清單
+                int image =product.getImage();
+                String price =product.getPrice();
+                String name =product.getName();
+                String de = product.getDescription();
+                favourites.add(new Favourites(image,name,de,price));
+                myDbHandler = new MyDBHandler(context, null,null, 1);
+                //Log.d("ResID", "price ID: " + price);
+
+                for(Favourites x : favourites){
+                    if (myDbHandler.checkFavouriteExist(x) !=true){
+                        myDbHandler.addFavourite(x);
+                        Log.d("addToFavourites", "sucess");
+                    }
+
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -60,7 +89,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
         TextView name;
         TextView description;
         TextView price;
-        Button button;
+        Button favouritebutton;
+        Button addtoorder;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,7 +98,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
             name = itemView.findViewById(R.id.product_name);
             description = itemView.findViewById(R.id.product_description);
             price = itemView.findViewById(R.id.product_price);
-            button = itemView.findViewById(R.id.product_button);
+            favouritebutton = itemView.findViewById(R.id.favourite_button);
+            addtoorder = itemView.findViewById(R.id.add_to_order_button);
         }
     }
 }
