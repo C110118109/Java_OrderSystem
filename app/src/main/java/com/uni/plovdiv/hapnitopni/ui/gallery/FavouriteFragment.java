@@ -1,9 +1,11 @@
-package com.uni.plovdiv.hapnitopni.ui.slideshow;
+package com.uni.plovdiv.hapnitopni.ui.gallery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +28,7 @@ public class FavouriteFragment extends Fragment {
     private RecyclerView recycleview;
     MyDBHandler myDbHandler;
     Favourites favourite;
-
+    Button favouritebutton;
     private ArrayList<Favourites> favourites;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class FavouriteFragment extends Fragment {
 
             favourite = new Favourites(favouritesArrayList.get(i).getImage(),favouritesArrayList.get(i).getName(),
                     favouritesArrayList.get(i).getDescription()
-                    ,favouritesArrayList.get(i).getPrice());
+                    ,favouritesArrayList.get(i).getPrice(),favouritesArrayList.get(i).getStatus());
 
             favourites.add(favourite);
         }

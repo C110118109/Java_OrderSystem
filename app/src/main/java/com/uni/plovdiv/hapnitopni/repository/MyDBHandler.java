@@ -44,6 +44,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_FA_PRODUCT_NAME = "fa_product_name";
     public static final String COLUMN_FA_DESCRIPTION = "fa_description";
     public static final String COLUMN_FA_PRICE = "fa_price";
+    public static final String COLUMN_STATUS = "status";
 
     //table ORDERS info
     public static final String TABLE_ORDERS_NAME = "orders";
@@ -114,7 +115,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_FA_IMAGE_ID + " INTEGER ," +
                 COLUMN_FA_PRODUCT_NAME + " TEXT ," +
                 COLUMN_FA_DESCRIPTION + " TEXT ," +
-                COLUMN_FA_PRICE + " TEXT " +
+                COLUMN_FA_PRICE + " TEXT ," +
+                COLUMN_STATUS + " TEXT " +
                 ");";
 
         sqLiteDatabase.execSQL(query);
@@ -154,6 +156,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_FA_PRODUCT_NAME, favourite.getName());
         values.put(COLUMN_FA_DESCRIPTION, favourite.getDescription());
         values.put(COLUMN_FA_PRICE, favourite.getPrice());
+        values.put(COLUMN_STATUS, favourite.getStatus());
+
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -268,7 +272,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 favouritesArrayList.add(new Favourites(cursor.getInt(1),
                         cursor.getString(2),
                         cursor.getString(3),
-                        cursor.getString(4)));
+                        cursor.getString(4),
+                        cursor.getString(5)));
             } while (cursor.moveToNext());
 
         }
@@ -454,6 +459,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query  = String.format("Delete from users where id = %d", userId);
         db.execSQL(query);
     }
+
+    public void deleteFavourites (String faName){
+        SQLiteDatabase db = getWritableDatabase();
+        String query  = String.format("Delete from favourites where fa_product_name = '%s' ", faName);
+        db.execSQL(query);
+    }
+
 
     public void editUser(int id,String name, String email, String password){
         SQLiteDatabase db = getWritableDatabase();

@@ -6,12 +6,14 @@ public class Favourites {
     private String name;
     private String description;
     private String price;
+    private String status;
 
-    public Favourites(int image, String name, String description, String price) {
+    public Favourites(int image, String name, String description, String price,String status) {
         this.image = image;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.status = status ;
     }
 
     public int getId() {
@@ -52,5 +54,13 @@ public class Favourites {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

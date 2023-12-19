@@ -36,7 +36,7 @@
         tools:layout="@layout/location_fragment" />
     <fragment
         android:id="@+id/nav_favourite"
-        android:name="com.uni.plovdiv.hapnitopni.ui.slideshow.FavouriteFragment"
+        android:name="com.uni.plovdiv.hapnitopni.ui.gallery.FavouriteFragment"
         android:label="收藏夾"
         tools:layout="@layout/favourite_fragment" />
     <fragment

@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uni.plovdiv.hapnitopni.R;
+import com.uni.plovdiv.hapnitopni.activities.LoginActivity;
 import com.uni.plovdiv.hapnitopni.entities.Favourites;
 import com.uni.plovdiv.hapnitopni.entities.Products;
 import com.uni.plovdiv.hapnitopni.repository.MyDBHandler;
@@ -61,7 +63,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
                 String price =product.getPrice();
                 String name =product.getName();
                 String de = product.getDescription();
-                favourites.add(new Favourites(image,name,de,price));
+                String status ="T";
+                favourites.add(new Favourites(image,name,de,price,status));
                 myDbHandler = new MyDBHandler(context, null,null, 1);
                 //Log.d("ResID", "price ID: " + price);
 
@@ -69,10 +72,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
                     if (myDbHandler.checkFavouriteExist(x) !=true){
                         myDbHandler.addFavourite(x);
                         Log.d("addToFavourites", "sucess");
+                        Toast.makeText(context, "餐點收藏成功!", Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        Toast.makeText(context, "餐點已在收藏夾!", Toast.LENGTH_SHORT).show();
                     }
 
                 }
-
+                //Toast.makeText(context, "餐點收藏成功!", Toast.LENGTH_SHORT).show();
+                notifyItemChanged(holder.getAdapterPosition());
             }
         });
 
