@@ -14,19 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.uni.plovdiv.hapnitopni.R;
 import com.uni.plovdiv.hapnitopni.adapters.LocationAdapter;
+import com.uni.plovdiv.hapnitopni.adapters.OrderAdapter;
 import com.uni.plovdiv.hapnitopni.entities.Locations;
+import com.uni.plovdiv.hapnitopni.entities.Orders;
 import com.uni.plovdiv.hapnitopni.repository.MyDBHandler;
 
 import java.util.ArrayList;
 
 public class ShoppingcartFragment extends Fragment  {
 
-    private ArrayList<Locations> locationsArrayList;
+    private ArrayList<Orders> ordersArrayList;
     private RecyclerView recycleview;
     MyDBHandler myDbHandler;
-    Locations location;
+    Orders order;
 
-    private ArrayList<Locations> locations;
+    private ArrayList<Orders> orders;
 
 
     Button toGMap;
@@ -36,7 +38,7 @@ public class ShoppingcartFragment extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //productsInfo = myDbHandler.allProducts();
-        View root = inflater.inflate(R.layout.location_fragment, container, false);
+        View root = inflater.inflate(R.layout.shoppinrcart_fragment, container, false);
 
         return root;
     }
@@ -45,30 +47,32 @@ public class ShoppingcartFragment extends Fragment  {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        locations = new ArrayList<>();
+        orders = new ArrayList<>();
 
         myDbHandler = new MyDBHandler(getContext(),null,null,1);
-        locationsArrayList = myDbHandler.allLocations();
+        ordersArrayList = myDbHandler.allOrders();
         dataInitialize();
 
         recycleview = view.findViewById(R.id.recycleView);
         recycleview.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleview.setHasFixedSize(true);
 
-        LocationAdapter locationAdapter = new LocationAdapter(getContext(), locations);
-        recycleview.setAdapter(locationAdapter);
-        locationAdapter.notifyDataSetChanged();
+        OrderAdapter orderAdapter = new OrderAdapter(getContext(), orders);
+        recycleview.setAdapter(orderAdapter);
+        orderAdapter.notifyDataSetChanged();
     }
 
     private void dataInitialize() {
 
-        for (int i = 0; i<locationsArrayList.size(); i++){
+        for (int i = 0; i<ordersArrayList.size(); i++){
 
-             location = new Locations(locationsArrayList.get(i).getPhoto(),locationsArrayList.get(i).getName(),
-                                   locationsArrayList.get(i).getAddress()
-                                   ,locationsArrayList.get(i).getTab());
+             order = new Orders(ordersArrayList.get(i).getImage(),
+                     ordersArrayList.get(i).getName(),
+                     ordersArrayList.get(i).getQuantity(),
+                     ordersArrayList.get(i).getDescription(),
+                     ordersArrayList.get(i).getPrice());
 
-            locations.add(location);
+            orders.add(order);
         }
 
     }

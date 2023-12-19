@@ -49,10 +49,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
     //table ORDERS info
     public static final String TABLE_ORDERS_NAME = "orders";
     public static final String COLUMN_ORDER_ID = "id";
-    public static final String COLUMN_USER_TO_ORDERS_ID = "user_id";
-    public static final String COLUMN_PRODUCT_TO_ORDERS_ID = "product_name";
-    public static final String COLUMN_QUANTITY = "quantity";
-    public static final String COLUMN_NUMBER = "number";
+    public static final String COLUMN_ORDER_IMAGE_ID = "image_id";
+    public static final String COLUMN_ORDER_NAME = "name";
+    public static final String COLUMN_ORDER_DESCRIPTION = "description";
+    public static final String COLUMN_ORDER_PRICE = "price";
+    public static final String COLUMN_ORDER_QUANTITY = "quantity";
+
 
     //table LOCATIONS info
     public static final String TABLE_LOCATIONS_NAME = "locations";
@@ -103,10 +105,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         String query4 = "CREATE TABLE " + TABLE_ORDERS_NAME + "(" +
                 COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_USER_TO_ORDERS_ID + " INTEGER ," +
-                COLUMN_PRODUCT_TO_ORDERS_ID + " TEXT ," +
-                COLUMN_QUANTITY + " INTEGER ," +
-                COLUMN_NUMBER + " INTEGER" +
+                COLUMN_ORDER_IMAGE_ID + " INTEGER ," +
+                COLUMN_ORDER_NAME + " TEXT ," +
+                COLUMN_ORDER_DESCRIPTION + " TEXT ," +
+                COLUMN_ORDER_PRICE + " INTEGER ," +
+                COLUMN_ORDER_QUANTITY + " INTEGER" +
                 ");";
 
         //if price is string could be easiest for retrieving data and put in the fragment using TextView
@@ -164,18 +167,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_FAVOURITES_NAME, null, values);
         db.close();
     }
-//    public void addOrder(Orders order) {
-//        ContentValues values = new ContentValues();
-//        values.put(COLUMN_PRODUCT_TO_ORDERS_ID, order.g());
-//        values.put(COLUMN_PRODUCT_NAME, order.getName());
-//        values.put(COLUMN_DESCRIPTION, order.getDescription());
-//        values.put(COLUMN_PRICE, order.getPrice());
-//
-//        SQLiteDatabase db = getWritableDatabase();
-//
-//        db.insert(TABLE_PRODUCTS_NAME, null, values);
-//        db.close();
-//    }
+    public void addOrder(Orders order) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ORDER_IMAGE_ID, order.getImage());
+        values.put(COLUMN_ORDER_NAME, order.getName());
+        values.put(COLUMN_ORDER_DESCRIPTION, order.getDescription());
+        values.put(COLUMN_ORDER_PRICE, order.getPrice());
+        values.put(COLUMN_ORDER_QUANTITY, order.getQuantity());
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.insert(TABLE_ORDERS_NAME, null, values);
+        db.close();
+    }
 
     public void addLocation(Locations location) {
         ContentValues valuess = new ContentValues();
@@ -217,6 +221,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
             return false;
 
     }
+
+
     public Boolean checkLocationExist(Locations location) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -308,12 +314,40 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return locationsArrayList;
     }
 
+    public ArrayList<Orders> allOrders() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from " + TABLE_ORDERS_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<Orders> ordersArrayList= new ArrayList<>();
+
+        // from first to last row in table products
+        if (cursor.moveToFirst()) {
+            do {
+                //adding the data
+                ordersArrayList.add(new Orders(cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getInt(3),
+                        cursor.getString(4),
+                        cursor.getInt(5)));
+            } while (cursor.moveToNext());
+
+        }
+
+        cursor.close();
+        //return ArrayList for easiest use
+        return ordersArrayList;
+    }
+
     //add a new row to the table Orders
     public Boolean Orderation(Orders order) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NUMBER, order.getNumber());
-        values.put(COLUMN_USER_ID, order.getUser_id());
-        values.put(COLUMN_PRODUCT_TO_ORDERS_ID, order.getProduct_name());
+        values.put(COLUMN_ORDER_IMAGE_ID, order.getImage());
+        values.put(COLUMN_ORDER_NAME, order.getName());
+        values.put(COLUMN_ORDER_DESCRIPTION, order.getDescription());
+        values.put(COLUMN_ORDER_PRICE, order.getPrice());
+        values.put(COLUMN_ORDER_QUANTITY, order.getQuantity());
 //        values.put(COLUMN_IS_CURRENT_USER, bool);
         SQLiteDatabase db = getWritableDatabase();
         //db.insert returns type long

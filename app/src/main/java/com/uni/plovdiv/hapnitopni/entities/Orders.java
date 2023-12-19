@@ -3,17 +3,19 @@ package com.uni.plovdiv.hapnitopni.entities;
 public class Orders {
 
     private int id;
-    private int user_id ;
-    private int product_name;
+    private int image ;
+    private String name;
     private int quantity ;
-    private int number ;
+    private String description;
+    private int price ;
 
-    public Orders(int id, int user_id, int product_id, int quantity,int number) {
-        this.id = id;
-        this.user_id = user_id;
-        this.product_name = product_name;
+    public Orders( int image, String name, int quantity,String description,int price) {
+        this.image = image;
+        this.name = name;
         this.quantity = quantity;
-        this.number = number;
+        this.description = description;
+        this.price = price;
+
     }
 
     public int getId() {
@@ -24,20 +26,20 @@ public class Orders {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getImage() {
+        return image;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setImage(int image) {
+        this.image = image;
     }
 
-    public int getProduct_name() {
-        return product_name;
+    public String getName() {
+        return name;
     }
 
-    public void setProduct_name(int product_name) {
-        this.product_name = product_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getQuantity() {
@@ -48,13 +50,19 @@ public class Orders {
         this.quantity = quantity;
     }
 
-    public int getNumber() {
-        return number;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public int getPrice() {
+        return price;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
 }
