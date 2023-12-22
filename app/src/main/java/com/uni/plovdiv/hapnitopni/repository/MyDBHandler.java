@@ -222,6 +222,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
+    public Boolean checkOrderExist(Orders order) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        //rawQuery method ask for query and array where to put the selected info
+        Cursor cursor = db.rawQuery("Select * from orders where name = ?",
+                new String[]{order.getName()});
+
+        if (cursor.getCount() > 0)
+            return true;
+        else
+            return false;
+
+    }
 
     public Boolean checkLocationExist(Locations location) {
         SQLiteDatabase db = getWritableDatabase();
@@ -328,8 +341,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 //adding the data
                 ordersArrayList.add(new Orders(cursor.getInt(1),
                         cursor.getString(2),
-                        cursor.getInt(3),
-                        cursor.getString(4),
+                        cursor.getString(3),
+                        cursor.getInt(4),
                         cursor.getInt(5)));
             } while (cursor.moveToNext());
 
@@ -419,6 +432,24 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return result;
     }
+
+    public String[] getOrderQuantity(String name) {
+        SQLiteDatabase db = getWritableDatabase();
+        String quantity="";
+        String[] result = new String[1];
+        Cursor cursor = db.rawQuery("Select name from orders where name =" + name ,null);
+
+        if(cursor.moveToFirst()){
+            name += cursor.getString(0);
+
+        }else{
+            name = "not found";
+        }
+
+        result[0] = name;
+
+        return result;
+    }
     public String[] getUserEmail(String user_id) {
         SQLiteDatabase db = getWritableDatabase();
         String email= "";
@@ -493,7 +524,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query  = String.format("Delete from users where id = %d", userId);
         db.execSQL(query);
     }
-
+    public void clearOrderData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("orders", null, null);
+        db.close();
+    }
     public void deleteFavourites (String faName){
         SQLiteDatabase db = getWritableDatabase();
         String query  = String.format("Delete from favourites where fa_product_name = '%s' ", faName);

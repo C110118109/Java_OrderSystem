@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.uni.plovdiv.hapnitopni.R;
 import com.uni.plovdiv.hapnitopni.adapters.MenuAdapter;
+import com.uni.plovdiv.hapnitopni.entities.Orders;
 import com.uni.plovdiv.hapnitopni.entities.Products;
 import com.uni.plovdiv.hapnitopni.repository.MyDBHandler;
 

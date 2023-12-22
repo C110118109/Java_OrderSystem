@@ -9,7 +9,7 @@ public class Orders {
     private String description;
     private int price ;
 
-    public Orders( int image, String name, int quantity,String description,int price) {
+    public Orders( int image, String name,String description,int price, int quantity) {
         this.image = image;
         this.name = name;
         this.quantity = quantity;

@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 //drawer 上方DrawerLayout 的引用。
                 //setOpenableLayout(drawer) 方法将 DrawerLayout 设置为可打开的布局
                 //etOpenableLayout設置為可打開的布局
-                R.id.nav_home, R.id.nav_menu, R.id.nav_favourite,R.id.nav_location, R.id.nav_edit_user)
+                R.id.nav_home, R.id.nav_menu, R.id.nav_favourite,R.id.nav_order,R.id.nav_location, R.id.nav_edit_user)
                 .setOpenableLayout(drawer)
                 .build();
 
