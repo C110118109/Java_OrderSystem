@@ -2,11 +2,16 @@ package com.uni.plovdiv.hapnitopni.ui.gallery;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CursorAdapter;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,10 +37,12 @@ public class ShoppingcartFragment extends Fragment  {
     Orders order;
     Button checkout;
     private ArrayList<Orders> orders;
-
-
+    private Cursor maincursor; // 記錄目前資料庫查詢指標
+    private SQLiteDatabase db;
+    private SimpleCursorAdapter adapter;
+    private ListView listView = null;
     Button toGMap;
-
+    private MyDBHandler dbHelper;
 
     @Nullable
     @Override
@@ -64,6 +71,12 @@ public class ShoppingcartFragment extends Fragment  {
                         myDbHandler.clearOrderData();
                         Toast.makeText(getContext(), "餐點已送出!", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        // 更新数据源
+                        orders.clear();
+                        ordersArrayList.clear();
+                        ordersArrayList = myDbHandler.allOrders();
+                        dataInitialize();
+
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -77,6 +90,7 @@ public class ShoppingcartFragment extends Fragment  {
                 dialog.show();
             }
         });
+
         super.onViewCreated(view, savedInstanceState);
 
         orders = new ArrayList<>();
@@ -108,4 +122,7 @@ public class ShoppingcartFragment extends Fragment  {
         }
 
     }
+
+
+
 }

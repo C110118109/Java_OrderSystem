@@ -126,7 +126,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
                             if (myDbHandler.checkOrderExist(x) !=true){
                                 myDbHandler.addOrder(x);
                                 Log.d("addToOrders", "sucess");
-                                Toast.makeText(context, "餐點以新增至購物車!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "餐點已新增至購物車!", Toast.LENGTH_SHORT).show();
 
                             }else{
                                 Toast.makeText(context, "餐點已在購物車內!", Toast.LENGTH_SHORT).show();
@@ -151,7 +151,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
                             }
 
                         }
-                        //Toast.makeText(context, "餐點收藏成功!", Toast.LENGTH_SHORT).show();
+
                         notifyItemChanged(holder.getAdapterPosition());
 
                         Toast.makeText(context, "新增" + selectedQuantity + "杯"+name, Toast.LENGTH_SHORT).show();
