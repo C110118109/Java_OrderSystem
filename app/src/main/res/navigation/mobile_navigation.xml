@@ -23,12 +23,25 @@
         android:id="@+id/nav_menu"
         android:name="com.uni.plovdiv.hapnitopni.ui.gallery.MenuFragment"
         android:label="菜單"
-        tools:layout="@layout/menu_fragment" />
+        tools:layout="@layout/menu_fragment" >
+
+        <action
+            android:id="@+id/action_nav_menu_to_nav_order"
+            app:destination="@id/nav_order"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in" />
+    </fragment>
     <fragment
         android:id="@+id/nav_order"
         android:name="com.uni.plovdiv.hapnitopni.ui.gallery.ShoppingcartFragment"
         android:label="購物車"
-        tools:layout="@layout/shoppinrcart_fragment" />
+        tools:layout="@layout/shoppinrcart_fragment" >
+        <action
+            android:id="@+id/action_nav_order_to_nav_menu"
+            app:destination="@id/nav_menu"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in" />
+    </fragment>
     <fragment
         android:id="@+id/nav_location"
         android:name="com.uni.plovdiv.hapnitopni.ui.gallery.LocationFragment"

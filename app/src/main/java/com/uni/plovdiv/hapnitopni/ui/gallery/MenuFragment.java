@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uni.plovdiv.hapnitopni.R;
 import com.uni.plovdiv.hapnitopni.adapters.MenuAdapter;
 import com.uni.plovdiv.hapnitopni.entities.Orders;
@@ -27,7 +30,7 @@ public class MenuFragment extends Fragment  {
     Products product;
 
     private ArrayList<Products> products;
-
+    FloatingActionButton fab;
 
 
 
@@ -35,13 +38,26 @@ public class MenuFragment extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //productsInfo = myDbHandler.allProducts();
-        return inflater.inflate(R.layout.menu_fragment, container, false);
+        View root = inflater.inflate(R.layout.menu_fragment, container, false);
 
+        return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        fab = view.findViewById(R.id.fabToShoppingCart);
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Navigation.findNavController(view).navigate(R.id.action_nav_menu_to_nav_order);
+
+            }
+        });
 
         products = new ArrayList<>();
 

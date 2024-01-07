@@ -197,6 +197,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
             price = itemView.findViewById(R.id.product_price);
             favouritebutton = itemView.findViewById(R.id.favourite_button);
             addtoorder = itemView.findViewById(R.id.add_to_order_button);
+
         }
     }
 }

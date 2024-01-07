@@ -26,9 +26,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uni.plovdiv.hapnitopni.MainActivity;
 import com.uni.plovdiv.hapnitopni.R;
 import com.uni.plovdiv.hapnitopni.adapters.LocationAdapter;
@@ -53,6 +55,7 @@ public class ShoppingcartFragment extends Fragment  {
     private ListView listView = null;
     Button toGMap;
     private MyDBHandler dbHelper;
+    FloatingActionButton fab;
 
     @Nullable
     @Override
@@ -66,6 +69,18 @@ public class ShoppingcartFragment extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         checkout = view.findViewById(R.id.checkoutButton);
+        fab = view.findViewById(R.id.fabToMenu);
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Navigation.findNavController(view).navigate(R.id.action_nav_order_to_nav_menu);
+
+            }
+        });
         checkout.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -10,7 +10,20 @@
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="start|top"
         tools:listitem="@layout/product_item"
         />
 
-    </FrameLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabToShoppingCart"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="#FA7C1C"
+        android:contentDescription="@string/shopping_cart"
+        android:src="@drawable/shopping_basket_24px" />
+
+</FrameLayout>
