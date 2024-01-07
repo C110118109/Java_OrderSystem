@@ -56,7 +56,7 @@ public class ShoppingcartFragment extends Fragment  {
     Button toGMap;
     private MyDBHandler dbHelper;
     FloatingActionButton fab;
-
+    FloatingActionButton fresh_fab;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,15 +70,18 @@ public class ShoppingcartFragment extends Fragment  {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         checkout = view.findViewById(R.id.checkoutButton);
         fab = view.findViewById(R.id.fabToMenu);
-
+        fresh_fab = view.findViewById(R.id.fabRefresh);
 
         fab.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 Navigation.findNavController(view).navigate(R.id.action_nav_order_to_nav_menu);
-
+            }
+        });
+        fresh_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_nav_order_to_order);
             }
         });
         checkout.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +107,7 @@ public class ShoppingcartFragment extends Fragment  {
                         //refreshListView();
 
                         sendNotification();
-
+                        Navigation.findNavController(view).navigate(R.id.action_nav_order_to_order);
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

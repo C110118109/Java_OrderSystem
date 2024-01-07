@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,15 +31,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- FAB -->
+    <!-- FAB 在右下方 -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabToMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/menu_book_24px"
+        android:src="@drawable/playlist_add_24px"
         android:backgroundTint="#FA7C1C"
         app:layout_constraintBottom_toTopOf="@id/checkoutButton"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 新增的 FAB 在左下方 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/refresh_24px"
+        android:backgroundTint="#B3B3B3"
+        app:layout_constraintBottom_toTopOf="@id/checkoutButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
