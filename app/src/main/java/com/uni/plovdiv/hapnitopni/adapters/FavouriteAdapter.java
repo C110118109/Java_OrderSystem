@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uni.plovdiv.hapnitopni.R;
@@ -87,7 +88,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
                 Toast.makeText(context, "餐點取消收藏!", Toast.LENGTH_SHORT).show();
 
                 notifyItemChanged(holder.getAdapterPosition());
-
+                Navigation.findNavController(v).navigate(R.id.action_nav_fa_to_nav_fa);
             }
         });
 

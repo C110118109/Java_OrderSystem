@@ -56,7 +56,13 @@
         android:id="@+id/nav_favourite"
         android:name="com.uni.plovdiv.hapnitopni.ui.gallery.FavouriteFragment"
         android:label="收藏夾"
-        tools:layout="@layout/favourite_fragment" />
+        tools:layout="@layout/favourite_fragment" >
+        <action
+            android:id="@+id/action_nav_fa_to_nav_fa"
+            app:destination="@id/nav_favourite"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in" />
+    </fragment>
     <fragment
         android:id="@+id/nav_edit_user"
         android:name="com.uni.plovdiv.hapnitopni.ui.EditUserFragment"
